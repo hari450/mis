@@ -148,6 +148,7 @@ class ProductController extends AppBaseController
             $icon = "";
             }
 
+            
         $product = $this->productRepository->update($request->all(), $id);
         $product->update(['image'=>$icon]);
 
