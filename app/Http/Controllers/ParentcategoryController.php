@@ -133,25 +133,24 @@ class ParentcategoryController extends AppBaseController
 
 
          // if there is image found that image will unlink.
-         if(isset($parentcategory->icon)){
-            if(file_exists(public_path()."/uploads/$parentcategory->icon")){
-                unlink(public_path()."/uploads/$parentcategory->icon");
-             }
-        }
+        //  if(isset($request->icon)){
+        //     if(file_exists(public_path()."/uploads/$parentcategory->icon")){
+        //         unlink(public_path()."/uploads/$parentcategory->icon");
+        //      }
+        // }
 
 
     // upload image to the public directory.
-    if($request->hasFile('icon')) {
-        $icon = time().'_'.$request->icon->getClientOriginalName();
-        $request->icon->move(public_path('uploads'), $icon);
-        } else {
-        $icon = "";
-        }
+
 
         $parentcategory = $this->parentcategoryRepository->update($request->all(), $id);
 
-        $parentcategory->update(['icon'=>$icon]);
 
+        if($request->hasFile('icon')) {
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(public_path('uploads'), $icon);
+            $parentcategory->update(['icon'=>$icon]);
+            }
         Flash::success('Parentcategory updated successfully.');
 
         return redirect(route('parentcategories.index'));
