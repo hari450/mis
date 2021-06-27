@@ -12,39 +12,39 @@
                   <div class="collapse" id="first{{$k}}">
                     <ul class="nav flex-column ml-3" style="margin-left: 70px;">
                         @foreach($cat->subcategory as $kk=>$subcat)
-                          <li class="nav-item"><a class="nav-link" href="#first{{$k}}{{$kk}}" data-toggle="collapse" aria-expanded="false" aria-controls="first">{{ $subcat->name }}</a>
-                          
-                                      <div class="collapse" id="first{{$k}}{{$kk}}">
+                          <li class="nav-item"><a class="nav-link" href="{{ route('website.parentcats',$subcat->id) }}" >{{ $subcat->name }}</a>
+
+                                      {{-- <div class="collapse" id="first{{$k}}{{$kk}}">
                                         <ul class="nav flex-column ml-3" style="margin-left: 70px;">
                                             @foreach($subcat->parentcategory as $kkk=>$parentcat)
                                               <li class="nav-item"><a class="nav-link" href="#first{{$k}}{{$kk}}{{$kkk}}" data-toggle="collapse" aria-expanded="false" aria-controls="first" href="#">{{ $parentcat->name }}</a>
-                                              
+
                                                       <div class="collapse" id="first{{$k}}{{$kk}}{{$kkk}}">
                                                               <ul class="nav flex-column ml-3" style="margin-left: 70px;">
                                                               @foreach($parentcat->childcategories as $childcat)
                                                                   <li class="nav-item"><a href="{{  route('website.product', $childcat->id) }}" class="nav-link"   >{{ $childcat->name }}</a>
-                                                                  
+
                                                                   </li>
                                                                 @endforeach
                                                               </ul>
                                                       </div>
-                                              
+
                                               </li>
                                             @endforeach
                                         </ul>
-                                      </div>
+                                      </div> --}}
                           </li>
                         @endforeach
                     </ul>
                   </div>
       </li>
       @endforeach
-  
+
   </ul>
 </div>
 
 
-<!-- 
+<!--
 
 
 <div class="m-5">
@@ -79,7 +79,7 @@
     <li class="nav-item"><a class="nav-link disabled" href="#0">Fourth</a></li>
   </ul>
 </div> -->
-<!--   
+<!--
 <ul >
 @foreach($category as $cat)
   <li>
@@ -95,11 +95,11 @@
                                         <li>{{ $childcat->name }}
                                             <ul  >
                                                 @foreach($childcat->products as $product)
-                                                    <li> {{ $product->name }} 
+                                                    <li> {{ $product->name }}
                                                             <ul  >
                                                                 @foreach($product->product_part_number as $partnumber)
                                                                 <li>{{ $partnumber->part_number }}
-                                                                   
+
                                                                 </li>
                                                                 @endforeach
                                                             </ul >

@@ -57,16 +57,20 @@ class Product_part_numberController extends AppBaseController
      */
     public function store(CreateProduct_part_numberRequest $request)
     {
-        $input = $request->except('specification_id');
-
+        $input = $request->except(['specification_id','icon']);
+        if($request->hasFile('icon')) {
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(public_path('uploads'), $icon);
+            $input['icon'] = $icon;
+            }
         $productPartNumber = $this->productPartNumberRepository->create($input);
-        
+
         foreach ($request->only('specification_id') as $tag) {
             $productPartNumber -> specification() -> attach($tag);
         }
-      
+
         Flash::success('Product Part Number saved successfully.');
-        
+
         return redirect(route('productPartNumbers.index'));
     }
 
@@ -112,7 +116,7 @@ class Product_part_numberController extends AppBaseController
             'specification'      => $specification,
              'product'            => $product,
              'productPartNumber' => $productPartNumber,
-            
+
         ];
         return view('product_part_numbers.edit')->with($data);
     }
@@ -135,10 +139,28 @@ class Product_part_numberController extends AppBaseController
             return redirect(route('productPartNumbers.index'));
         }
         $input = $request->except('specification_id');
-        $productPartNumber = $this->productPartNumberRepository->update($input, $id);
 
-        $productPartNumber->specification()->sync([]); 
-      
+   // if there is image found that image will unlink.
+
+//    if(isset($productPartNumber->icon)){
+//     if(file_exists(public_path()."/uploads/$productPartNumber->icon")){
+//         unlink(public_path()."/uploads/$productPartNumber->icon");
+//      }
+// }
+
+
+// upload image to the public directory.
+if($request->hasFile('icon')) {
+$icon = time().'_'.$request->icon->getClientOriginalName();
+$request->icon->move(public_path('uploads'), $icon);
+} else {
+$icon = "";
+}
+
+        $productPartNumber = $this->productPartNumberRepository->update($input, $id);
+        $productPartNumber->update(['icon'=>$icon]);
+        $productPartNumber->specification()->sync([]);
+
         foreach ($request->only('specification_id') as $tag) {
             $productPartNumber -> specification() -> attach($tag);
         }

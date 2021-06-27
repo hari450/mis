@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function()
 {
-   
+
 Route::resource('categorys', App\Http\Controllers\CategorysController::class);
 
 Route::resource('subcategories', App\Http\Controllers\SubcategoryController::class);
@@ -44,6 +44,17 @@ Route::resource('specificationTypes', App\Http\Controllers\Specification_typeCon
 
 
 
-Route::get('/website', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
+Route::prefix('website')->group(function () {
+    Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
+    Route::get('/listparent/{subcat_id}', [App\Http\Controllers\FrontendController::class, 'parentcats'])->name('website.parentcats');
+    Route::get('/parts/{product_id}', [App\Http\Controllers\FrontendController::class, 'productpartnumber'])->name('website.productpartnumber');
+});
+
+Route::post('addtocart',[App\Http\Controllers\CartController::class, 'addtocart'])->name('add-to-cart');
+Route::get('/cartloadbyajax',[App\Http\Controllers\CartController::class, 'cartloadbyajax'])->name('load-cart-data');
+Route::get('/cartdata',[App\Http\Controllers\CartController::class, 'cartdata'])->name('cartdata');
+Route::get('/clearcart',[App\Http\Controllers\CartController::class, 'clearcart'])->name('clear-cart');
+
+
 Route::get('/website/product/{childcat_id}', [App\Http\Controllers\FrontendController::class, 'product'])->name('website.product');
 Route::get('/website/part/{product_id}', [App\Http\Controllers\FrontendController::class, 'part'])->name('website.part');

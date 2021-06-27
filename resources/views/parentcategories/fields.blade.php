@@ -6,7 +6,7 @@
 
 <!-- Subcategory Id Field -->
 <div class="form-group col-sm-6">
- 
+
     <div class="form-group">
     {!! Form::label('category_id', 'Subcategory:') !!}
   <select class="form-control" id="subcategory_id" name="subcategory_id">
@@ -16,3 +16,10 @@
   </select>
 </div>
 </div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('icon', 'Icon:') !!}
+    {!! Form::file('icon') !!}
+
+</div>
+

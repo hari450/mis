@@ -31,7 +31,7 @@ class ParentcategoryController extends AppBaseController
     public function index(Request $request)
     {
         $parentcategories = $this->parentcategoryRepository->all();
-        
+
         return view('parentcategories.index')
             ->with('parentcategories', $parentcategories);
     }
@@ -56,8 +56,12 @@ class ParentcategoryController extends AppBaseController
      */
     public function store(CreateParentcategoryRequest $request)
     {
-        $input = $request->all();
-
+        $input = $request->except('icon');
+        if($request->hasFile('icon')) {
+            $icon = time().'_'.$request->icon->getClientOriginalName();
+            $request->icon->move(public_path('uploads'), $icon);
+            $input['icon'] = $icon;
+            }
         $parentcategory = $this->parentcategoryRepository->create($input);
 
         Flash::success('Parentcategory saved successfully.');
@@ -103,7 +107,7 @@ class ParentcategoryController extends AppBaseController
         }
         $Subcategory = Subcategory::all();
         $data = [
-            'Subcategory' => $Subcategory,
+            'subcategory' => $Subcategory,
             'parentcategory' =>  $parentcategory
         ];
         return view('parentcategories.edit')->with($data);
@@ -127,7 +131,26 @@ class ParentcategoryController extends AppBaseController
             return redirect(route('parentcategories.index'));
         }
 
+
+         // if there is image found that image will unlink.
+         if(isset($parentcategory->icon)){
+            if(file_exists(public_path()."/uploads/$parentcategory->icon")){
+                unlink(public_path()."/uploads/$parentcategory->icon");
+             }
+        }
+
+
+    // upload image to the public directory.
+    if($request->hasFile('icon')) {
+        $icon = time().'_'.$request->icon->getClientOriginalName();
+        $request->icon->move(public_path('uploads'), $icon);
+        } else {
+        $icon = "";
+        }
+
         $parentcategory = $this->parentcategoryRepository->update($request->all(), $id);
+
+        $parentcategory->update(['icon'=>$icon]);
 
         Flash::success('Parentcategory updated successfully.');
 
