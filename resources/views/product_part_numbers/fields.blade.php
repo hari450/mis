@@ -146,8 +146,34 @@
     {!! Form::label('childcategory_id', 'Specification :') !!}
     <select class="form-control" id="specification_id" name="specification_id[]" multiple="multiple">
     @foreach($specification as $categories):
-       
+
      <option value="{{ $categories->id }}" {{ (isset($productPartNumber) && in_array($categories->id, $productPartNumber->specification->pluck('pivot.specification_id')->toArray() ) ? 'selected' : '')}}>{{ $categories->name }}</option>
     @endforeach
   </select>
 </div>
+
+<!-- Sale price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('original_price', 'Original Price') !!}
+    {!! Form::text('original_price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+<!-- Sale price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sale_discount', 'Dash Price:') !!}
+    {!! Form::text('dash_price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+<!-- Sale price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('Quantity', 'Quantity:') !!}
+    {!! Form::text('quantity', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+</div>
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('icon', 'Icon:') !!}
+    {!! Form::file('icon') !!}
+
+</div>
+

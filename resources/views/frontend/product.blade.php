@@ -2,11 +2,44 @@
 @section('content')
 
 
+<div class="d-md-flex h-md-100 align-items-center">
 
+    <!-- First Half -->
+    <div class="col-md-3 p-0 bg-indigo h-md-100">
+        <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+            <div class="logoarea pt-5 pb-5">
+
+
+                <div class="w-25 p-3" style="background-color: #eee;">
+
+              <?php?>
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Half -->
+    <div class="col-md-9 p-0 bg-white h-md-100 loginarea">
+        <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+            Second half content here
+        </div>
+    </div>
+
+</div>
+
+
+
+{{--
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-            
+
                         @foreach($products as $product)
                         <div class="col-sm-4 col-md-3 box-product-outer">
                           <div class="box-product">
@@ -31,13 +64,13 @@
                                   <span class="price-old">$15.00</span>
                               </div>
                           </div>
-                        </div>  
+                        </div>
                         @endforeach
-                      
-            
+
+
         </div>
     </div>
-</div>
+</div> --}}
 
 
 

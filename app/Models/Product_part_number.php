@@ -43,7 +43,7 @@ class Product_part_number extends Model
     use HasFactory;
 
     public $table = 'product_part_number';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -76,7 +76,11 @@ class Product_part_number extends Model
         'cad',
         'modified_by',
         'product_id',
-        'specification_id'
+        'specification_id',
+        'icon',
+        'quantity',
+        'original_price',
+        'dash_price'
     ];
 
     /**
@@ -158,7 +162,7 @@ class Product_part_number extends Model
     public function specification()
     {
         return $this->belongsToMany(\App\Models\Specification::class,'productpartnumber_specification','product_part_number_id','specification_id');
-      
+
     }
 
 }

@@ -4,6 +4,7 @@
             <tr>
                 <th>Name</th>
         <th>Subcategory</th>
+        <th>Image</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -12,6 +13,7 @@
             <tr>
                 <td>{{ $parentcategory->name }}</td>
             <td>{{ $parentcategory->subcategory->name }}</td>
+            <td> <img src="{{url('/uploads/')}}/{{ $parentcategory->icon }}" alt="Image" width="40px" height="40px"/></td>
                 <td width="120">
                     {!! Form::open(['route' => ['parentcategories.destroy', $parentcategory->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

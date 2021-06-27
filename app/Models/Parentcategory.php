@@ -23,7 +23,7 @@ class Parentcategory extends Model
     use HasFactory;
 
     public $table = 'parentcategory';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -34,7 +34,9 @@ class Parentcategory extends Model
 
     public $fillable = [
         'name',
-        'subcategory_id'
+        'subcategory_id',
+        'icon',
+        'description'
     ];
 
     /**
