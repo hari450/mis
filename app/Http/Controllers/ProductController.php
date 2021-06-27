@@ -60,11 +60,11 @@ class ProductController extends AppBaseController
         $input = $request->except('image');
 
         if($request->hasFile('image')) {
-            $image = time().'_'.$request->image->getClientOriginalName();  
+            $image = time().'_'.$request->image->getClientOriginalName();
             $request->image->move(public_path('uploads'), $image);
             $input['image'] = $image;
             }
-          
+
         $product = $this->productRepository->create($input);
 
         Flash::success('Product saved successfully.');
@@ -137,18 +137,20 @@ class ProductController extends AppBaseController
 
 
         // if there is image found that image will unlink.
-        if(file_exists(public_path()."/uploads/$product->image")){
-            unlink(public_path()."/uploads/$product->image");
+        if(isset($product->image)){
+                if(file_exists(public_path()."/uploads/$product->image")){
+                    unlink(public_path()."/uploads/$product->image");
+                }
         }
 
         if($request->hasFile('image')) {
-            $icon = time().'_'.$request->image->getClientOriginalName();  
-            $request->image->move(public_path('uploads'), $icon);      
+            $icon = time().'_'.$request->image->getClientOriginalName();
+            $request->image->move(public_path('uploads'), $icon);
             } else {
             $icon = "";
             }
 
-            
+
         $product = $this->productRepository->update($request->all(), $id);
         $product->update(['image'=>$icon]);
 

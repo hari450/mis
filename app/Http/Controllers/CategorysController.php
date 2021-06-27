@@ -57,11 +57,11 @@ class CategorysController extends AppBaseController
         $input = $request->except('icon');
 
         if($request->hasFile('icon')) {
-            $icon = time().'_'.$request->icon->getClientOriginalName();  
+            $icon = time().'_'.$request->icon->getClientOriginalName();
             $request->icon->move(public_path('uploads'), $icon);
             $input['icon'] = $icon;
             }
-          
+
         $categorys = $this->categorysRepository->create($input);
 
         Flash::success('Categorys saved successfully.');
@@ -128,13 +128,16 @@ class CategorysController extends AppBaseController
         }
 
         // if there is image found that image will unlink.
-         if(file_exists(public_path()."/uploads/$categorys->icon")){
-             unlink(public_path()."/uploads/$categorys->icon");
-         }
+            if(isset($categorys->icon)){
+                if(file_exists(public_path()."/uploads/$categorys->icon")){
+                    unlink(public_path()."/uploads/$categorys->icon");
+                 }
+            }
+
 
         // upload image to the public directory.
         if($request->hasFile('icon')) {
-            $icon = time().'_'.$request->icon->getClientOriginalName();  
+            $icon = time().'_'.$request->icon->getClientOriginalName();
             $request->icon->move(public_path('uploads'), $icon);
             } else {
             $icon = "";
