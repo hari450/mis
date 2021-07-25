@@ -25,7 +25,17 @@
                     @include('product_part_numbers.fields')
                 </div>
 
+                <div class="row">
+
+                    @include('livewire.partnos')
+                </div>
+
             </div>
+
+
+
+
+
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -36,4 +46,6 @@
 
         </div>
     </div>
+
+
 @endsection

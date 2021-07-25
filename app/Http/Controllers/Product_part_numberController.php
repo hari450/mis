@@ -11,8 +11,11 @@ use Flash;
 use Response;
 use App\Models\Product;
 use App\Models\Specification;
+use App\Models\Partnofield;
 class Product_part_numberController extends AppBaseController
 {
+
+
     /** @var  Product_part_numberRepository */
     private $productPartNumberRepository;
 
@@ -33,7 +36,7 @@ class Product_part_numberController extends AppBaseController
         $productPartNumbers = $this->productPartNumberRepository->all();
 
         return view('product_part_numbers.index')
-            ->with('productPartNumbers', $productPartNumbers);
+            ->with(compact('productPartNumbers'));
     }
 
     /**
@@ -44,8 +47,9 @@ class Product_part_numberController extends AppBaseController
     public function create()
     {
         $product = Product::all();
+        $dynamicfield = [];
         $specification = Specification::all();
-        return view('product_part_numbers.create')->with(compact('product','specification'));
+        return view('product_part_numbers.create')->with(compact('product','specification','dynamicfield'));
     }
 
     /**
@@ -57,7 +61,8 @@ class Product_part_numberController extends AppBaseController
      */
     public function store(CreateProduct_part_numberRequest $request)
     {
-        $input = $request->except(['specification_id','icon']);
+        $input = $request->except(['specification_id','icon','addmore']);
+
         if($request->hasFile('icon')) {
             $icon = time().'_'.$request->icon->getClientOriginalName();
             $request->icon->move(public_path('uploads'), $icon);
@@ -68,6 +73,33 @@ class Product_part_numberController extends AppBaseController
         foreach ($request->only('specification_id') as $tag) {
             $productPartNumber -> specification() -> attach($tag);
         }
+
+        //dynamic fields
+
+
+        // $request->validate([
+
+        //     'addmore.*._label' => 'required',
+
+        //     'addmore.*._value' => 'required',
+
+        // ]);
+
+
+
+
+        foreach ($request->addmore as $key => $value) {
+            $value['product_part_number_id'] = $productPartNumber->id;
+            if(!empty($value['_label'])){
+                Partnofield::create($value);
+            }
+
+
+        }
+
+
+
+
 
         Flash::success('Product Part Number saved successfully.');
 
@@ -116,6 +148,7 @@ class Product_part_numberController extends AppBaseController
             'specification'      => $specification,
              'product'            => $product,
              'productPartNumber' => $productPartNumber,
+             'dynamicfield'       => Partnofield::where('product_part_number_id',$id)->get()
 
         ];
         return view('product_part_numbers.edit')->with($data);
@@ -138,7 +171,7 @@ class Product_part_numberController extends AppBaseController
 
             return redirect(route('productPartNumbers.index'));
         }
-        $input = $request->except('specification_id');
+        $input = $request->except('specification_id','addmore');
 
    // if there is image found that image will unlink.
 
@@ -164,6 +197,19 @@ $icon = "";
         foreach ($request->only('specification_id') as $tag) {
             $productPartNumber -> specification() -> attach($tag);
         }
+
+
+        Partnofield::where('product_part_number_id',$id)->delete();
+        foreach ($request->addmore as $key => $value) {
+            $value['product_part_number_id'] = $id;
+            if(!empty($value['_label'])){
+                Partnofield::create($value);
+            }
+
+        }
+
+
+
         Flash::success('Product Part Number updated successfully.');
 
         return redirect(route('productPartNumbers.index'));
