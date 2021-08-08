@@ -161,4 +161,10 @@ class Specification_typeController extends AppBaseController
 
         return redirect(route('specificationTypes.index'));
     }
+
+
+    public function getspecificationtype(request $request){
+      $d =  Specification::with('specificationTypes')->whereIn('id',$request->only('field')["field"])->get();
+      echo json_encode($d);
+    }
 }

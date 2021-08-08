@@ -39,6 +39,8 @@ Route::resource('productPartNumbers', App\Http\Controllers\Product_part_numberCo
 Route::resource('specifications', App\Http\Controllers\SpecificationController::class);
 
 Route::resource('specificationTypes', App\Http\Controllers\Specification_typeController::class);
+
+Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeController::class, 'getspecificationtype'])->name('getspecificationtype');
 });
 
 

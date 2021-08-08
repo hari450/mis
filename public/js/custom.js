@@ -67,3 +67,36 @@
     // });
 
 
+
+
+    //  product number page
+
+    $('#specification_id').on('change', function(event){
+            event.preventDefault();
+            var selected = $("#specification_id :selected").map((_, e) => e.value).get();
+            $.ajax({
+                           url:'../getspecificationtype',
+                           method:'post',
+                           data:{"field":selected, "_token": $('#token').val() },
+                           dataType:'json',
+                           beforeSend:function(){
+                              // $('#save').attr('disabled','disabled');
+                           },
+                           success:function(data)
+                           {
+
+                            var html = "";
+                            data.forEach((e)=>{
+                               html += "<div class='section'>";
+                               html +=`<label>${e.name}</label><br>`;
+                                        e.specification_types.forEach((ee)=>{
+                                        html +=`<input type="checkbox" id="vehicle1" name="specification_type[]" value="${ee.id}">
+                                                <label for="vehicle1"> ${ee.spec_type}</label><br>`;
+                                        });
+                               html += "</div>";
+                            })
+                            $(".specifiation_type").html(html);
+
+                           }
+                        });
+    });

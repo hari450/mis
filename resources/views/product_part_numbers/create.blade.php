@@ -18,6 +18,7 @@
         <div class="card">
 
             {!! Form::open(['route' => 'productPartNumbers.store','files'=>'true']) !!}
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
             <div class="card-body">
 

@@ -152,6 +152,15 @@
   </select>
 </div>
 
+
+<!-- Specifiation Types -->
+<div class="form-group col-sm-6">
+    {!! Form::label('childcategory_id', 'Specification Type:') !!}
+     <div class="specifiation_type"></div>
+</div>
+
+
+
 <!-- Sale price Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('original_price', 'Original Price') !!}
