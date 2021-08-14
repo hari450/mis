@@ -13,7 +13,12 @@ class FrontendController extends Controller
 
 
     public function index(Request $request){
-       $category = Categorys::all();
+       $category = Categorys::paginate(5);
+
+       if ($request->ajax()) {
+        $view = view('frontend.loadcategory',compact('category'))->render();
+        return response()->json(['html'=>$view]);
+    }
 
        return view('frontend.index')->with(compact('category'));
     }
