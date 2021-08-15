@@ -16,8 +16,9 @@
 
         $('.fastiner-slider').owlCarousel({
             nav: true,
-            loop: true,
+            loop: false,
             margin: 10,
+            items:1,
             autoplay: true,
             navContainer: false,
             responsive: {

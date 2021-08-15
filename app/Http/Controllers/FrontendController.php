@@ -19,8 +19,19 @@ class FrontendController extends Controller
         $view = view('frontend.loadcategory',compact('category'))->render();
         return response()->json(['html'=>$view]);
     }
+     $product_part_number = DB::table('product_part_number')
+    ->join('product', 'product.id', '=', 'product_part_number.product_id')
+    ->join('childcategory', 'childcategory.id', '=', 'product.childcategory_id')
+    ->join('parentcategory','parentcategory.id','=','childcategory.parentcategory_id')
+    ->join('subcategory','subcategory.id','=','parentcategory.subcategory_id')
+    ->join('category','category.id','=','subcategory.category_id')
+    ->select('product_part_number.icon')
+    ->where('category.id','=',1)
+    ->get();
 
-       return view('frontend.index')->with(compact('category'));
+
+
+       return view('frontend.index')->with(compact('category','product_part_number'));
     }
 
     public function product($childcategory_id){

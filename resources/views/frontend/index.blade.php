@@ -103,6 +103,10 @@
         </div>
         @include('frontend.home.our_channel')
 
+        @include('frontend.home.fastner')
+
+        @include('frontend.home.resttools')
+
     </div>
 
 
