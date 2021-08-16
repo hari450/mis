@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md sticky-top addShadow no-radius">
     <div class="container headnav">
         <a class="navbar-brand" href="#">
-            <img class="header-logo" src="./images/logo.svg" alt="bumaas">
+            <img class="header-logo" src="{{ asset('/images/logo.svg') }}" alt="bumaas">
         </a>
         <form class="form-group">
             <div class="input-group">
