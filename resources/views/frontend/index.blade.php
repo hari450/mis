@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <div class="input-group login-input-wrapper">
                                         <div class="input-group-addon login-input-icon-wrapper">
-                                            <span class="bi bi-envelope login-input-icon"></span>
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         </div>
                                         <input name="txtemail" id="txtemail" type="text"
                                             placeholder="Input your user ID or Email" name="pass"
@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     <div class="input-group login-input-wrapper">
                                         <div class="input-group-addon login-input-icon-wrapper">
-                                            <span class="bi bi-key login-input-icon"></span>
+                                        <i class="fa fa-key" aria-hidden="true"></i>
                                         </div>
                                         <input name="pwd" id="pwd" type="password" placeholder="Input your password"
                                             name="pass" class="login-input form-control">
