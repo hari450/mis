@@ -137,22 +137,24 @@ class ProductController extends AppBaseController
 
 
         // if there is image found that image will unlink.
-        if(isset($product->image)){
-                if(file_exists(public_path()."/uploads/$product->image")){
-                    unlink(public_path()."/uploads/$product->image");
-                }
-        }
+        // if(isset($product->image)){
+        //         if(file_exists(public_path()."/uploads/$product->image")){
+        //             unlink(public_path()."/uploads/$product->image");
+        //         }
+        // }
 
         if($request->hasFile('image')) {
             $icon = time().'_'.$request->image->getClientOriginalName();
             $request->image->move(public_path('uploads'), $icon);
             } else {
-            $icon = "";
+           // $icon = "";
             }
 
 
         $product = $this->productRepository->update($request->all(), $id);
+        if($request->hasFile('image')) {
         $product->update(['image'=>$icon]);
+        }
 
         Flash::success('Product updated successfully.');
 

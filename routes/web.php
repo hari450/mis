@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -49,6 +50,10 @@ Route::prefix('website')->group(function () {
     Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
     Route::get('/listparent/{subcat_id}', [App\Http\Controllers\FrontendController::class, 'parentcats'])->name('website.parentcats');
     Route::get('/parts/{product_id}', [App\Http\Controllers\FrontendController::class, 'productpartnumber'])->name('website.productpartnumber');
+    Route::get('/products/{childategory_id}', [App\Http\Controllers\FrontendController::class, 'products'])->name('website.products');
+    Route::get('/partno_product/{product_id}', [App\Http\Controllers\FrontendController::class, 'partno_product'])->name('website.partno_product');
+    Route::get('/partnumber/{partno_id}', [App\Http\Controllers\FrontendController::class, 'partnumberpage'])->name('website.partnumberpage');
+
 });
 
 Route::post('addtocart',[App\Http\Controllers\CartController::class, 'addtocart'])->name('add-to-cart');
@@ -59,3 +64,5 @@ Route::get('/clearcart',[App\Http\Controllers\CartController::class, 'clearcart'
 
 Route::get('/website/product/{childcat_id}', [App\Http\Controllers\FrontendController::class, 'product'])->name('website.product');
 Route::get('/website/part/{product_id}', [App\Http\Controllers\FrontendController::class, 'part'])->name('website.part');
+
+

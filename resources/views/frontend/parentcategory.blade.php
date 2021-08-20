@@ -1,8 +1,62 @@
 @extends('frontend.theme')
 @section('content')
 
-<div class="container">
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="nav-category-wrapper">
+                <div class="nav-category-title">
+                    <div>
+                        <h3>{{ $subcatname['1'] }}</h3>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+
+                    <ul class="list-group my-3">
+                    @include('frontend.parentlist.sidemenu')
+                    </ul>
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+
+
+            @foreach ($parent_categorys->chunk(4) as $chunk)
+            <div class="row">
+                @foreach ($chunk as $parent_category)
+                    <div class="col-md-3">
+                        <div class="product">
+                            <img class="center-block" src="{{url('')}}/uploads/{{ $parent_category->icon }}" alt="" width="50%">
+                            <div class="text-center">{{ $parent_category->name }}</div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{{--
+
+<div class="container">
     <div class="col-lg-3 col-sm-3 col-md-3 left">
         <ul class="list-group accordion flex-column">
            @foreach ($parent_categorys as $k=>$parent_category)
@@ -44,7 +98,7 @@
 
     </div>
 
-</div>
+</div> --}}
 
 
 @endsection

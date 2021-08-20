@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }}</title>
+    <title>misumi</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -23,23 +23,73 @@
           integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
           crossorigin="anonymous"/>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+          <link href="{{ asset('css/admincss.css') }}" rel="stylesheet">
+
 
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="fix-header">
+<div class="">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        {{-- <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a> --}}
     </div>
 
-    <!-- /.login-logo -->
 
-    <!-- /.login-box-body -->
+
+
+
+
+
+    <section id="wrapper" class="login-register">
+        <div class="login-box">
+          <div class="white-box">
+            <form action="{{ url('/login') }}" class="form-horizontal form-material" id="loginform"  method="post">
+                @csrf
+              <h3 align="center">ADMIN LOGIN</h3>
+
+              <div class="form-group m-t-40">
+                <div class="col-xs-12">
+                  <input class="form-control  @error('email') is-invalid @enderror" type="email" name="email" id="email"  value="{{ old('email') }}" required="" placeholder="Email">
+                  @error('email')
+                  <span class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required="" placeholder="Password">
+                  @error('password')
+                  <span class="error invalid-feedback">{{ $message }}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12">
+                  <div class="checkbox checkbox-primary pull-left p-t-0">
+                    <input id="checkbox-signup" type="checkbox">
+                    <label for="checkbox-signup"> Remember me </label>
+                  </div> </div>
+              </div>
+              <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                  <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" name="submit" value="login">Log In</button>
+                </div>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+{{--
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
@@ -99,8 +149,8 @@
                 <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
             </p>
         </div>
-        <!-- /.login-card-body -->
-    </div>
+
+    </div> --}}
 
 </div>
 <!-- /.login-box -->

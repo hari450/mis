@@ -161,3 +161,6 @@ $('.clear_cart').click(function (e) {
 </script>
 
 @endsection
+
+
+
