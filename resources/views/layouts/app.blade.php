@@ -31,6 +31,11 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
+{{--
+          <link rel="stylesheet" href="{{ asset('assets/bootstrap-5-0-1/css/bootstrap.min.css') }}" />
+          <link rel="stylesheet" href="{{ asset('assets/bootstrap-icon/bootstrap-icons.css') }}" />
+          <link href="{{ asset('css/logincustom.css') }}" rel="stylesheet"> --}}
+
 
     @yield('third_party_stylesheets')
 
@@ -136,6 +141,9 @@
         crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js" integrity="sha512-J+763o/bd3r9iW+gFEqTaeyi+uAphmzkE/zU8FxY6iAvD3nQKXa+ZAWkBI9QS9QkYEKddQoiy0I5GDxKf/ORBA==" crossorigin="anonymous"></script>
+
+
+
 
 <script>
     $(function () {

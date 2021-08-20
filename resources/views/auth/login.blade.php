@@ -24,22 +24,72 @@
           crossorigin="anonymous"/>
 
 
-          <link href="{{ asset('css/admincss.css') }}" rel="stylesheet">
+          <link href="{{ asset('css/logincustom.css') }}" rel="stylesheet">
+          <link href="{{ asset('css/adminlogin.css') }}" rel="stylesheet">
 
 
 </head>
 <body class="fix-header">
-<div class="">
+
     <div class="login-logo">
         {{-- <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a> --}}
     </div>
 
 
 
+    <div class="login-container">
+        <div class="login-logo">
+            <img src="{{ asset('/images/best-india-kart-white.png') }}" alt="logo" />
+        </div>
+        <div>
+            <form action="{{ url('/login') }}" class="form-horizontal form-material" id="loginform"  method="post">
+                    @csrf
+                <p class="login-title">Login into your account</p>
+                <div class="mb-2">
+                    <input required type="text" class="form-control form-control-lg" name="email" id="email" value="{{ old('email') }}" placeholder="E-Mail Id">
+                    @error('email')
+                    <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="input-group input-group-lg mb-2">
+                    <input required type="password" class="form-control" name="password" id="password" placeholder="******" />
+                    @error('password')
+                    <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                    <div class="input-group-append display-flex">
+                        <span class="input-group-text" onclick="password_show_hide();">
+                            <i class="bi bi-eye" id="show_eye"></i>
+                            <i class="bi bi-eye-slash d-none" id="hide_eye"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="d-grid mb-2">
+                    <button type="submit" id="login_btn" class="btn btn-login">
+                        Login
+                    </button>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Keep me logged in
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 text-end">
+                        <p class="mb-1">
+                            <a href="{{ route('password.request') }}">I forgot my password</a>
+                        </p>
+                        {{-- <a class="text-white need-help" href="./forgot-password.php">Need Help? Contact Support</a> --}}
+                    </div>
+                </div>
+            </form>
+        </div>
 
 
 
-
+{{--
     <section id="wrapper" class="login-register">
         <div class="login-box">
           <div class="white-box">
@@ -80,7 +130,7 @@
 
           </div>
         </div>
-      </section>
+      </section> --}}
 
 
 
