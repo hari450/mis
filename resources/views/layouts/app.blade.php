@@ -14,12 +14,12 @@
           rel="stylesheet">
 
     <!-- AdminLTE -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css"
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css"
           integrity="sha512-rVZC4rf0Piwtw/LsgwXxKXzWq3L0P6atiQKBNuXYRbg2FoRbSTIY0k2DxuJcs7dk4e/ShtMzglHKBOJxW8EQyQ=="
-          crossorigin="anonymous"/>
+          crossorigin="anonymous"/> --}}
 
     <!-- iCheck -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
           integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
           crossorigin="anonymous"/>
 
@@ -30,11 +30,11 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
-          crossorigin="anonymous"/>
-{{--
+          crossorigin="anonymous"/> --}}
+
           <link rel="stylesheet" href="{{ asset('assets/bootstrap-5-0-1/css/bootstrap.min.css') }}" />
           <link rel="stylesheet" href="{{ asset('assets/bootstrap-icon/bootstrap-icons.css') }}" />
-          <link href="{{ asset('css/logincustom.css') }}" rel="stylesheet"> --}}
+          <link href="{{ asset('css/logincustom.css') }}" rel="stylesheet">
 
 
     @yield('third_party_stylesheets')
@@ -42,10 +42,12 @@
     @stack('page_css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<body >
+    @include('layouts.sidebar')
+<div class="page-wrapper">
+    @include('layouts.admin.navbar')
     <!-- Main Header -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    {{-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -85,13 +87,13 @@
                 </ul>
             </li>
         </ul>
-    </nav>
+    </nav> --}}
 
     <!-- Left side column. contains the logo and sidebar -->
-@include('layouts.sidebar')
+
 
 <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="page-content">
         <section class="content">
             @yield('content')
         </section>
@@ -107,7 +109,7 @@
     </footer>
 </div>
 <script src="{{ asset('js/custom.js') }}" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>
 
@@ -142,8 +144,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js" integrity="sha512-J+763o/bd3r9iW+gFEqTaeyi+uAphmzkE/zU8FxY6iAvD3nQKXa+ZAWkBI9QS9QkYEKddQoiy0I5GDxKf/ORBA==" crossorigin="anonymous"></script>
 
-
-
+<script src="{{ asset('assets/bootstrap-5-0-1/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/bootstrap-5-0-1/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/common.js') }}"></script>
 
 <script>
     $(function () {
