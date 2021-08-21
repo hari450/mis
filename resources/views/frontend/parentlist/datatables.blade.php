@@ -1,7 +1,7 @@
 
 <div class="container">
 
-    <table class="table table-bordered data-table">
+    <table class="table data-table">
         <thead>
             <tr>
                 <th></th>

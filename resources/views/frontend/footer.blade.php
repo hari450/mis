@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <img class="img-fluid" src="{{ URL::to('/') }}/images/footer-logo.png" alt="footer">
+                <img class="img-fluid footer-logo" src="{{ URL::to('/') }}/images/footer-logo.png" alt="footer">
             </div>
             <div class="col-md-3">
                 <h2>Customer Service</h2>
@@ -42,14 +42,14 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-4">
-                <div class="d-flex align-items-end hei100Per">
+                <div class="d-flex align-items-center hei100Per">
                     <div>
                         Copyright &copy; <span id="footerCurrentYear"></span> BEST INDIAKART All Rights Reserved.
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-center">
-                <div class="d-flex align-items-end hei100Per">
+                <div class="d-flex align-items-center hei100Per">
                     Design &amp; Developed by <a class="link-text-white" href="#">WEBDADS2U</a>
                 </div>
             </div>

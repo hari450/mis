@@ -1,8 +1,5 @@
 @extends('frontend.theme')
 @section('content')
-
-
-
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -13,14 +10,10 @@
                         </div>
                         <i class="bi bi-list"></i>
                     </div>
-
-
                         <ul class="list-group my-3">
                         @include('frontend.loadcategory')
                         </ul>
-
                         <span class="ajax-load"></span>
-
                     <div class="d-grid">
                         <button type="button" class="btn btn-primary more_product">More Products</button>
                     </div>
