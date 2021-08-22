@@ -97,7 +97,7 @@ $specification = Product_part_number::with(['specification'=>function($query){
                 ->addIndexColumn()
                 ->addColumn('img', function($row){
                     $im = url('')."/uploads/$row->icon";
-                    $img = "<img src=".$im." width='70%' class='image-icon'>";
+                    $img = "<img class='table-image' src=".$im." width='70%' class='image-icon'>";
                      return $img;
              })
              ->addColumn('part_number', function($row){

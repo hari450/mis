@@ -38,7 +38,7 @@
 {{--
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 pt-3">
 
                         @foreach($products as $product)
                         <div class="col-sm-4 col-md-3 box-product-outer">
