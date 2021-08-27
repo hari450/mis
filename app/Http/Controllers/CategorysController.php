@@ -130,7 +130,7 @@ class CategorysController extends AppBaseController
         // if there is image found that image will unlink.
             if(isset($categorys->icon)){
                 if(file_exists(public_path()."/uploads/$categorys->icon")){
-                    unlink(public_path()."/uploads/$categorys->icon");
+                  //  unlink(public_path()."/uploads/$categorys->icon");
                  }
             }
 

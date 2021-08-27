@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="nav-category-wrapper">
-                <h3 class="nav-category-title m-0">{{ $subcatname['1'] }}</h3>
+                <h3 class="nav-category-title m-0">{{ $subcatname->name ?? '' }}</h3>
                 <ul class="list-group my-3">
                     @include('frontend.parentlist.sidemenu')
                 </ul>

@@ -59,8 +59,8 @@ $specification = Product_part_number::with(['specification'=>function($query){
     public function parentcats(Request $request,$subcat_id){
        $parent_categorys = Parentcategory::where(['subcategory_id'=>$subcat_id])->get();
 
-       $subcatname = Subcategory::where('id','=',$subcat_id)->pluck('name','id');
-
+       $subcatname = Subcategory::where('id','=',$subcat_id)->first();
+     
     //    if ($request->ajax()) {
     //     $view = view('frontend.loadcategory',compact('category'))->render();
     //     return response()->json(['html'=>$view]);
