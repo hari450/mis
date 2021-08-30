@@ -12,6 +12,7 @@ use Response;
 use App\Models\Product;
 use App\Models\Specification;
 use App\Models\Partnofield;
+use App\Models\Partno_filters;
 class Product_part_numberController extends AppBaseController
 {
 
@@ -61,6 +62,7 @@ class Product_part_numberController extends AppBaseController
      */
     public function store(CreateProduct_part_numberRequest $request)
     {
+
         $input = $request->except(['specification_id','icon','addmore']);
 
         if($request->hasFile('icon')) {
@@ -68,11 +70,35 @@ class Product_part_numberController extends AppBaseController
             $request->icon->move(public_path('uploads'), $icon);
             $input['icon'] = $icon;
             }
+
+
+            // form insert
         $productPartNumber = $this->productPartNumberRepository->create($input);
 
-        foreach ($request->only('specification_id') as $tag) {
-            $productPartNumber -> specification() -> attach($tag);
+
+        $spec_filter = $request->only(['specification_id']);
+
+
+        if(isset($request->only('specification_id')['specification_id'])){
+        foreach ($request->only('specification_id')['specification_id'] as $k=>$tag) {
+
+            $productPartNumber -> specification() -> attach($k);
         }
+
+        foreach ($spec_filter['specification_id'] as $kk=>$spectype_filter) {
+            if(is_array($spectype_filter)){
+            foreach ($spectype_filter as $kkk=>$vvv) {
+                $array = array(
+                    'product_part_number_id' => $productPartNumber->id,
+                    'specification_type_id'  => $vvv,
+                    'specification_id'       => $kk,
+                );
+                Partno_filters::create($array);
+            }
+            } // check if array
+        }
+    }
+
 
         //dynamic fields
 
@@ -87,7 +113,7 @@ class Product_part_numberController extends AppBaseController
 
 
 
-
+ // add more
         foreach ($request->addmore as $key => $value) {
             $value['product_part_number_id'] = $productPartNumber->id;
             if(!empty($value['_label'])){
@@ -192,11 +218,40 @@ $icon = "";
 
         $productPartNumber = $this->productPartNumberRepository->update($input, $id);
         $productPartNumber->update(['icon'=>$icon]);
+
+
         $productPartNumber->specification()->sync([]);
 
-        foreach ($request->only('specification_id') as $tag) {
-            $productPartNumber -> specification() -> attach($tag);
+
+
+
+        if(isset($request->only('specification_id')['specification_id']) && $request->only('specification_id')['specification_id']){
+
+
+        foreach ($request->only('specification_id')['specification_id'] as $k=>$tag) {
+            $productPartNumber -> specification() -> attach($k);
         }
+
+        $spec_filter = $request->only(['specification_id']);
+        Partno_filters::where('product_part_number_id',$productPartNumber->id)->delete();
+
+        foreach ($spec_filter['specification_id'] as $kk=>$spectype_filter) {
+            if(is_array($spectype_filter)){
+            foreach ($spectype_filter as $kkk=>$vvv) {
+                $array = array(
+                    'product_part_number_id' => $productPartNumber->id,
+                    'specification_type_id'  => $vvv,
+                    'specification_id'       => $kk,
+                );
+                Partno_filters::create($array);
+            }
+        } // check if array
+
+        }
+
+
+
+    }
 
 
         Partnofield::where('product_part_number_id',$id)->delete();

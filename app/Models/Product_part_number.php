@@ -165,4 +165,15 @@ class Product_part_number extends Model
 
     }
 
+    public function partno_filters($partno_id , $spec_id)
+    {
+
+        return Partno_filters::where([['product_part_number_id',$partno_id],['specification_id',$spec_id]])->get();
+        //return $this->belongsToMany(\App\Models\Partno_filters::class,'productpartnumber_specification','','product_part_number_id','','product_part_number_id')->dd();
+
+    }
+
+
+
+
 }

@@ -142,22 +142,46 @@
 
 
 <!-- Childcategory Id Field -->
+
 <div class="form-group col-sm-6">
-    {!! Form::label('childcategory_id', 'Specification :') !!}
-    <select class="form-control" id="specification_id" name="specification_id[]" multiple="multiple">
+    {!! Form::label('childcategory_id', 'Specification ') !!}
+   <ul>
+  <li class="specul">
+
+    @foreach($specification as $categories):
+        <input type="checkbox" id="specification_id" name="specification_id[{{$categories->id}}]" value="{{ $categories->id }}" class="specul" {{ (isset($productPartNumber) && in_array($categories->id, $productPartNumber->specification->pluck('pivot.specification_id')->toArray() ) ? 'checked' : '')}}>
+         <label for="vehicle1"> {{ $categories->name }}</label><br>
+         <ul class="specul">
+             @foreach ($categories->specificationTypes as $item)
+                 <li class="specul">
+
+                    <input type="checkbox" id="specificationtypes" value="{{ $item->id }}" name="specification_id[{{$categories->id}}][]" value="specificationtypes" class="special" {{ (isset($productPartNumber) &&  in_array($item->id, $productPartNumber->partno_filters($productPartNumber->id , $categories->id)->pluck('specification_type_id')->toArray() ) ? 'checked' : '')}}>{{ $categories->name }}>
+                    <label for="vehicle2"> {{ $item->spec_type }}</label><br>
+                 </li>
+             @endforeach
+         </ul>
+    @endforeach
+  </li>
+   </ul>
+
+
+
+    <!-- <select class="form-control" id="specification_id" name="specification_id[]" multiple="multiple">
     @foreach($specification as $categories):
 
      <option value="{{ $categories->id }}" {{ (isset($productPartNumber) && in_array($categories->id, $productPartNumber->specification->pluck('pivot.specification_id')->toArray() ) ? 'selected' : '')}}>{{ $categories->name }}</option>
     @endforeach
-  </select>
+  </select> -->
+
+
 </div>
 
 
 <!-- Specifiation Types -->
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     {!! Form::label('childcategory_id', 'Specification Type:') !!}
      <div class="specifiation_type"></div>
-</div>
+</div> --}}
 
 
 
@@ -186,3 +210,8 @@
 
 </div>
 
+<style>
+    .specul{
+        list-style-type : none;
+    }
+</style>
