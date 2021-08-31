@@ -55,7 +55,14 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'mobileno' => ['required', 'numeric', 'min:11','unique:users,mobileno'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
+            'userType'  =>[],
+            'userLoginUserId' =>[],
+            'userCompany'  => [],
+            'userCompanyGST' => [],
+            'newsletter'  => []
+
+
         ]);
     }
 
@@ -72,16 +79,24 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'mobileno' =>  $data['mobileno'],
-            'status' =>  1
+            'status' =>  1,
+            'userType' =>  $data['userType'],
+            'userLoginUserId' => $data['userLoginUserId'],
+            'userCompany'     => $data['userCompany'],
+            'userCompanyGST'  => $data['userCompanyGST'],
+            'newsletter'      => $data['newsletter']
         ]);
     }
 
 
+
     public function register(Request $request)
     {
+
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
+
             return view('auth.register')->withErrors($validator->errors());
         }
 
@@ -90,5 +105,32 @@ class RegisterController extends Controller
         $user->sendEmailVerificationNotification();
         return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
       //  return redirect()->intended('website');
+    }
+
+    public function emailcheck(Request $request){
+
+        $email1 = User::where('email', $request->email)->get();
+
+        if($email1->count())
+        {
+            return json_encode(false);
+        } else {
+            return json_encode(true);
+        }
+
+    }
+
+
+    public function mobilecheck(Request $request){
+
+        $email1 = User::where('mobileno', $request->mobileno)->get();
+
+        if($email1->count())
+        {
+            return json_encode(false);
+        } else {
+            return json_encode(true);
+        }
+
     }
 }

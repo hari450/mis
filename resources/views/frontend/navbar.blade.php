@@ -54,8 +54,15 @@
                         aria-hidden="true"></i></button>
             </li>
             <li class="nav-item">
+
+            <span class="clearfix">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-shopping-basket"
-                        aria-hidden="true"></i></button>
+                    aria-hidden="true"></i></button>
+                <span class="basket-item-count">
+                    <span class="badge badge-pill red"> 0 </span>
+                </span>
+            </span>
+
             </li>
         </ul>
     </div>

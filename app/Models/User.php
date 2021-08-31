@@ -21,7 +21,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'status',
         'user_status',
-        'mobileno'
+        'mobileno',
+        'userType',
+        'userLoginUserId',
+        'userCompany',
+        'userCompanyGST',
+        'newsletter'
     ];
 
     /**

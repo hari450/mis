@@ -76,14 +76,45 @@
             </div>
 
         </div>
-
-
+        <div class="row product_data">
+        <input type="hidden" class="product_id" value="{{ $part_number->id }}"> <!-- Your Product ID -->
+        <input type="text" class="qty-input" value="1"> <!-- Your Number of Quantity -->
         <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+        </div>
 
         {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
 
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').click(function (e) {
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var product_id = $(this).closest('.product_data').find('.product_id').val();
+            var quantity = $(this).closest('.product_data').find('.qty-input').val();
+
+            $.ajax({
+                url: "{{ route('add-to-cart') }}",
+                method: "POST",
+                data: {
+                    'quantity': quantity,
+                    'product_id': product_id,
+                },
+                success: function (response) {
+                    alertify.set('notifier','position','top-right');
+                    alertify.success(response.status);
+                },
+            });
+        });
+    });
+</script>
 
 @endsection

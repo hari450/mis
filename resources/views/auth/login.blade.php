@@ -81,6 +81,8 @@
                         <p class="mb-1">
                             <a href="{{ route('password.request') }}">I forgot my password</a>
                         </p>
+
+
                         {{-- <a class="text-white need-help" href="./forgot-password.php">Need Help? Contact Support</a> --}}
                     </div>
                 </div>

@@ -73,6 +73,11 @@
                     <button type="submit" id="login_btn" class="btn btn-login">
                         Login
                     </button>
+
+                    <button type="submit" id="login_btn" class="btn btn-login">
+                        <a href="{{ route("register") }}" class="text-center text-white" >Signup</a>
+                    </button>
+
                 </div>
                 <div class="row mt-2">
                     <div class="col-sm-5">
@@ -87,6 +92,8 @@
                         <p class="mb-1">
                             <a href="{{ route('password.request') }}">I forgot my password</a>
                         </p>
+
+
                         {{-- <a class="text-white need-help" href="./forgot-password.php">Need Help? Contact Support</a> --}}
                     </div>
                 </div>

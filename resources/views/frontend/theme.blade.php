@@ -8,10 +8,12 @@
             <span class="badge badge-pill red"> 0 </span>
         </span>
     </span> -->
-    <div class="container-fluid">
+
+
+    {{-- <div class="container-fluid"> --}}
 
         @yield('content')
-    </div>
+    {{-- </div> --}}
 
 
 

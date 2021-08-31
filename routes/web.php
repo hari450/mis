@@ -61,6 +61,11 @@ Route::prefix('website')->group(function () {
 
 });
 
+
+Route::post('emailcheck',[App\Http\Controllers\Auth\RegisterController::class, 'emailcheck'])->name('emailcheck');
+Route::post('mobilecheck',[App\Http\Controllers\Auth\RegisterController::class, 'mobilecheck'])->name('mobilecheck');
+
+
 Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
 Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
 Route::post('logout',[App\Http\Controllers\UserController::class, 'authlogout'])->name('authlogout');
