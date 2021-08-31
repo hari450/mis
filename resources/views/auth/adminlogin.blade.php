@@ -83,9 +83,9 @@
                         </div>
                     </div>
                     <div class="col-sm-7 text-end">
-                        <p class="mb-1">
+                        {{-- <p class="mb-1">
                             <a href="{{ route('password.request') }}">I forgot my password</a>
-                        </p>
+                        </p> --}}
 
 
                         {{-- <a class="text-white need-help" href="./forgot-password.php">Need Help? Contact Support</a> --}}
