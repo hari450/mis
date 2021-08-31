@@ -165,7 +165,7 @@
 
 <script>
     $(document).ready(function(){
-        // Prevent users from submitting a form by hitting Enter.
+
         $(window).keydown(function(event){
             if(event.keyCode == 13) {
                 event.preventDefault();
@@ -327,10 +327,6 @@
                         minlength: "Please enter at least 3 characters  Company GST.",
                         maxlength: "Please enter only upto 25 characters  Company GST."
                     },
-                },
-                submitHandler: function(form) {
-                    $(".loading").css('display','block');
-                    form.submit();
                 }
             });
             // Adding rules

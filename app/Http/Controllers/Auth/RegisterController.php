@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
 class RegisterController extends Controller
 {
     /*
@@ -42,6 +41,8 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -102,9 +103,11 @@ class RegisterController extends Controller
 
         $id = $this->create($request->all())->id;
         $user = User::find($id);
+
         $user->sendEmailVerificationNotification();
-        return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
-      //  return redirect()->intended('website');
+       // return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
+       return redirect(RouteServiceProvider::HOME);
+       // return  redirect(route('website'))->with('message', 'Please Verify email with in 60 minutes.');
     }
 
     public function emailcheck(Request $request){

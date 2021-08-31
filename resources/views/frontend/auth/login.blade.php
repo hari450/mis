@@ -47,7 +47,7 @@
             <div class="alert alert-error">{{Session::get('message')}}</div>
              @endif
 
-            <form action="{{ url('authlogin') }}" class="form-horizontal form-material" id="loginform"  method="post">
+            <form action="{{ url('login') }}" class="form-horizontal form-material" id="loginform"  method="post">
                     @csrf
                 <p class="login-title">Login into your account</p>
                 <div class="mb-2">

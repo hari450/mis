@@ -46,7 +46,6 @@ Route::post('getspecificationtype',[App\Http\Controllers\Specification_typeContr
 });
 
 
-
 Route::prefix('website')->group(function () {
     Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
     Route::get('/listparent/{subcat_id}', [App\Http\Controllers\FrontendController::class, 'parentcats'])->name('website.parentcats');
@@ -61,6 +60,10 @@ Route::prefix('website')->group(function () {
 
 });
 
+//Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\VerificationController::class, 'verify']); // Make sure to keep this as your route name
+Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
+
+
 Route::get('adminlogin',[App\Http\Controllers\Auth\LoginController::class, 'adminlogin'])->name('adminlogin');
 
 Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'adminauth'])->name('adminauth');
@@ -71,7 +74,7 @@ Route::post('mobilecheck',[App\Http\Controllers\Auth\RegisterController::class, 
 
 
 Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
-Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
+//Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
 Route::post('logout',[App\Http\Controllers\UserController::class, 'authlogout'])->name('authlogout');
 
 
