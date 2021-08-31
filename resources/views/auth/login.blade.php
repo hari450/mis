@@ -74,9 +74,9 @@
                         Login
                     </button>
 
-                    <button type="submit" id="login_btn" class="btn btn-login">
-                        <a href="{{ route("register") }}" class="text-center text-white" >Signup</a>
-                    </button>
+
+                        <a href="{{ route("register") }}" class="text-center text-white" >Signup </a>
+
 
                 </div>
                 <div class="row mt-2">

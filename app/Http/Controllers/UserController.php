@@ -19,7 +19,7 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         $status = $request->only('status');
         $user = User::where([ ['email', $request->only('email')]])->first();
-        if(!$user->hasVerifiedEmail()){
+        if($user->email_verified_at == null){
             return Redirect::back()->with('message', 'Please Verify Your email');
         }
 
