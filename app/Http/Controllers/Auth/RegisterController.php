@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -29,8 +31,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    //protected $redirectTo = RouteServiceProvider::HOME;
     protected $redirectTo = RouteServiceProvider::HOME;
-
     /**
      * Create a new controller instance.
      *
@@ -51,6 +53,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'mobileno' => ['required', 'numeric', 'min:11','unique:users,mobileno'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -68,6 +71,24 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'mobileno' =>  $data['mobileno'],
+            'status' =>  1
         ]);
+    }
+
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            return view('auth.register')->withErrors($validator->errors());
+        }
+
+        $id = $this->create($request->all())->id;
+        $user = User::find($id);
+        $user->sendEmailVerificationNotification();
+        return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
+      //  return redirect()->intended('website');
     }
 }

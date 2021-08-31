@@ -72,6 +72,21 @@
                 </div>
 
                 <div class="input-group mb-3">
+                    <input type="type"
+                           name="mobileno"
+                           value="{{ old('mobileno') }}"
+                           class="form-control @error('mobileno') is-invalid @enderror"
+                           placeholder="Phone no">
+                    <div class="input-group-append">
+                        <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                    </div>
+                    @error('mobileno')
+                    <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
+                <div class="input-group mb-3">
                     <input type="password"
                            name="password"
                            class="form-control @error('password') is-invalid @enderror"

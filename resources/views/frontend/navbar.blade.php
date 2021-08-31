@@ -34,6 +34,7 @@
                 @auth
                 <form method="POST" action="{{ route('authlogout') }}">
                     @csrf
+                    {{ auth()->user()->email }}
                     <button type="submit">Logout</button>
                   </form>
                 @endauth

@@ -1,6 +1,11 @@
 @extends('frontend.theme')
 @section('content')
     <div class="container">
+
+        @if (Session::has('message'))
+        <div class="alert alert-dark">{{Session::get('message')}}</div>
+         @endif
+
         <div class="row">
             <div class="col-md-3">
                 <div class="nav-category-wrapper">
@@ -102,7 +107,11 @@
 
     </div>
 
-
+<script>
+    $(".alert-dark").fadeTo(2000, 500).slideUp(1000, function(){
+    $(".alert-dark").slideUp(1000);
+});
+</script>
 
 
 @endsection

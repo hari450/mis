@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\URL;
 class FrontendController extends Controller
 {
 
+    public function __construct()
+    {
+       // $this->middleware(['auth', 'verified']);
+
+    }
 
     public function index(Request $request){
        $category = Categorys::paginate(5);
