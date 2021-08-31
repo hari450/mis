@@ -42,17 +42,16 @@
             <img src="{{ asset('/images/best-india-kart-white.png') }}" alt="logo" />
         </div>
         <div>
-
-            @if (Session::has('message'))
-            <div class="alert alert-error">{{Session::get('message')}}</div>
-             @endif
-
-            <form action="{{ url('authlogin') }}" class="form-horizontal form-material" id="loginform"  method="post">
+            @if (session('success'))
+            <div class="alert alert-warning" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+            <form action="{{ url('/adminauth') }}" class="form-horizontal form-material" id="loginform"  method="post">
                     @csrf
                 <p class="login-title">Login into your account</p>
                 <div class="mb-2">
                     <input required type="text" class="form-control form-control-lg" name="email" id="email" value="{{ old('email') }}" placeholder="E-Mail Id">
-
                     @error('email')
                     <span class="error invalid-feedback">{{ $message }}</span>
                     @enderror
@@ -73,11 +72,6 @@
                     <button type="submit" id="login_btn" class="btn btn-login">
                         Login
                     </button>
-
-                    <button type="submit" id="login_btn" class="btn btn-login">
-                        <a href="{{ route("register") }}" class="text-center text-white" >Signup</a>
-                    </button>
-
                 </div>
                 <div class="row mt-2">
                     <div class="col-sm-5">

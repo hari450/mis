@@ -61,6 +61,10 @@ Route::prefix('website')->group(function () {
 
 });
 
+Route::get('adminlogin',[App\Http\Controllers\Auth\LoginController::class, 'adminlogin'])->name('adminlogin');
+
+Route::post('adminauth',[App\Http\Controllers\Auth\LoginController::class, 'adminauth'])->name('adminauth');
+
 
 Route::post('emailcheck',[App\Http\Controllers\Auth\RegisterController::class, 'emailcheck'])->name('emailcheck');
 Route::post('mobilecheck',[App\Http\Controllers\Auth\RegisterController::class, 'mobilecheck'])->name('mobilecheck');
