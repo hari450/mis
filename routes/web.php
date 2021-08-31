@@ -53,13 +53,26 @@ Route::prefix('website')->group(function () {
     Route::get('/products/{childategory_id}', [App\Http\Controllers\FrontendController::class, 'products'])->name('website.products');
     Route::get('/partno_product/{product_id}', [App\Http\Controllers\FrontendController::class, 'partno_product'])->name('website.partno_product');
     Route::get('/partnumber/{partno_id}', [App\Http\Controllers\FrontendController::class, 'partnumberpage'])->name('website.partnumberpage');
+    // parentcategory
+    Route::get('/listparents/{childategory_id}', [App\Http\Controllers\FrontendController::class, 'listparents'])->name('website.listparents');
+    Route::get('/login',[App\Http\Controllers\UserController::class, 'login'])->name('website.userlogin');
+
 
 });
+
+Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
+Route::post('authlogin',[App\Http\Controllers\UserController::class, 'postlogin'])->name('authlogin');
+Route::post('logout',[App\Http\Controllers\UserController::class, 'authlogout'])->name('authlogout');
+
+
 
 Route::post('addtocart',[App\Http\Controllers\CartController::class, 'addtocart'])->name('add-to-cart');
 Route::get('/cartloadbyajax',[App\Http\Controllers\CartController::class, 'cartloadbyajax'])->name('load-cart-data');
 Route::get('/cartdata',[App\Http\Controllers\CartController::class, 'cartdata'])->name('cartdata');
 Route::get('/clearcart',[App\Http\Controllers\CartController::class, 'clearcart'])->name('clear-cart');
+
+
+//Route::get('add-to-cart/{id}', [ProductController::class, 'addtocart'])->name('add.to.cart');
 
 
 Route::get('/website/product/{childcat_id}', [App\Http\Controllers\FrontendController::class, 'product'])->name('website.product');

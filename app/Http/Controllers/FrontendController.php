@@ -11,6 +11,8 @@ use App\Models\Parentcategory;
 use App\Models\Subcategory;
 use DB;
 use DataTables;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\URL;
 
 class FrontendController extends Controller
 {
@@ -57,10 +59,11 @@ $specification = Product_part_number::with(['specification'=>function($query){
     }
 
     public function parentcats(Request $request,$subcat_id){
+
        $parent_categorys = Parentcategory::where(['subcategory_id'=>$subcat_id])->get();
 
        $subcatname = Subcategory::where('id','=',$subcat_id)->first();
-     
+
     //    if ($request->ajax()) {
     //     $view = view('frontend.loadcategory',compact('category'))->render();
     //     return response()->json(['html'=>$view]);
@@ -69,6 +72,8 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
        return view('frontend.parentcategory')->with(compact('parent_categorys','subcatname'));
     }
+
+
 
     public function productpartnumber($product_id){
         $part_number = Product_part_number::where('product_id',$product_id)->get();
@@ -82,7 +87,56 @@ $specification = Product_part_number::with(['specification'=>function($query){
 
     }
 
-    public function products( Request $request , $childategory_id  ){
+    public function listparents(Request $request,$parentcategory){
+        // parentcategory is id
+        $child = Childcategory::where('parentcategory_id','=',$parentcategory)->get();
+        $childids =  $child->pluck('id')->toArray();
+        $products = Product::wherein('childcategory_id',$childids)->get();
+        $product_ids =  $products->pluck('id')->toArray();
+        $part_number = Product_part_number::whereIn('product_id',$product_ids)->get();
+
+
+
+        if ($request->ajax()) {
+            if($request->get('prod_id')){
+                $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
+            }
+
+
+            $data = $part_number;
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('img', function($row){
+                        $im = url('')."/uploads/$row->icon";
+                        $img = "<img class='table-image' src=".$im." width='70%' class='image-icon'>";
+                         return $img;
+                 })
+                 ->addColumn('part_number', function($row){
+                     $route = route('website.partnumberpage',$row->id);
+                    $img = "<a href='".$route."' class='partnumber'>$row->part_number</a>";
+                     return $img;
+             })
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['img','part_number','action'])
+                    ->make(true);
+        }
+
+           $childcategory = [];
+
+
+           return view('frontend.product_bychild')->with(compact('products','childcategory'));
+
+
+   }
+
+
+
+    public function products(Route $route, Request $request , $childategory_id  ){
+
+
        $products = Product::where('childcategory_id','=',$childategory_id)->get();
        $product_ids =  $products->pluck('id')->toArray();
        $part_number = Product_part_number::whereIn('product_id',$product_ids)->get();
@@ -92,6 +146,8 @@ $specification = Product_part_number::with(['specification'=>function($query){
         if($request->get('prod_id')){
             $part_number = Product_part_number::where('product_id',$request->get('prod_id'))->get();
         }
+
+
         $data = $part_number;
         return Datatables::of($data)
                 ->addIndexColumn()

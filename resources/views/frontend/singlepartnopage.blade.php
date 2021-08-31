@@ -76,6 +76,12 @@
             </div>
 
         </div>
+
+
+        <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+
+        {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
+
     </div>
 </div>
 

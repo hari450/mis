@@ -154,7 +154,6 @@
          <ul class="specul">
              @foreach ($categories->specificationTypes as $item)
                  <li class="specul">
-
                     <input type="checkbox" id="specificationtypes" value="{{ $item->id }}" name="specification_id[{{$categories->id}}][]" value="specificationtypes" class="special" {{ (isset($productPartNumber) &&  in_array($item->id, $productPartNumber->partno_filters($productPartNumber->id , $categories->id)->pluck('specification_type_id')->toArray() ) ? 'checked' : '')}}>{{ $categories->name }}>
                     <label for="vehicle2"> {{ $item->spec_type }}</label><br>
                  </li>

@@ -17,15 +17,19 @@
             @foreach ($parent_categorys->chunk(4) as $chunk)
             <div class="row">
                 @foreach ($chunk as $parent_category)
-                <div class="col-md-3 mt-2">
-                    <div class="card cursor-pointer">
-                        <div class="category-product-list p-3">
-                            <img class="center-block" src="{{url('')}}/uploads/{{ $parent_category->icon }}" alt=""
-                                width="50%">
-                            <div class="text-center mt-3">{{ $parent_category->name }}</div>
-                        </div>
+
+                    <div class="col-md-3 mt-2">
+                        <a href="{{ route('website.listparents',$parent_category->id) }}">
+                            <div class="card cursor-pointer">
+                                <div class="category-product-list p-3">
+                                    <img class="center-block" src="{{url('')}}/uploads/{{ $parent_category->icon }}" alt=""
+                                        width="50%">
+                                    <div class="text-center mt-3">{{ $parent_category->name }}</div>
+                                </div>
+                            </div>
+                         </a>
                     </div>
-                </div>
+
                 @endforeach
             </div>
             @endforeach

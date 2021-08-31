@@ -4,7 +4,7 @@
     <div class="my-3">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="nav-category-title">{{ $childcategory->name }}</h3>
+                <h3 class="nav-category-title">{{ $childcategory->name ?? '' }}</h3>
             </div>
             <div class="col-md-6 text-right">
                 <button type="button" id="0" class="btn btn-primary product_id btn-sm">See All</button>
@@ -43,7 +43,14 @@
 <script>
 //datatables
 $(function() {
-    var table;
+    var currenturl = "{{ Route::currentRouteAction() }}";
+     url = currenturl.split('@')[1];
+     if(url == "listparents"){
+      url =  "{{ route('website.listparents', request()->route('childategory_id') ) }}"
+     } else {
+       url =  "{{ route('website.products', request()->route('childategory_id') ) }}"
+     }
+
     datatables(null);
     $(".product_id").click(function() {
         var p_id = $(this).attr('id')
@@ -55,7 +62,7 @@ $(function() {
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('website.products', request()->route('childategory_id') ) }}",
+                url: url,
                 type: 'GET',
                 data: function(d) {
                     d.prod_id = p_id;

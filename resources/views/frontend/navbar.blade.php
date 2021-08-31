@@ -29,6 +29,21 @@
                     </div>
                 </div>
             </li>
+
+            <li class="nav-item">
+                @auth
+                <form method="POST" action="{{ route('authlogout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                  </form>
+                @endauth
+                @guest
+                <a href="{{ route('website.userlogin') }}">Login</a>
+                @endguest
+
+
+            </li>
+
             <li class="nav-item">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-user-o"
                         aria-hidden="true"></i></button>
