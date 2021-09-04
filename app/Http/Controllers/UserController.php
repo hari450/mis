@@ -38,7 +38,7 @@ class UserController extends Controller
         }
         if (Auth::attempt($credentials)) {
 
-            return redirect()->intended('website');
+            return redirect('website');
         }
         return Redirect::back()->with('message', 'Username or password is invalid');
     }

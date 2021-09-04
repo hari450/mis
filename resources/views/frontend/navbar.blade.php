@@ -39,7 +39,7 @@
                   </form>
                 @endauth
                 @guest
-                <a href="{{ route('website.userlogin') }}">Login</a>
+                <a href="{{ route('login') }}">Login</a>
                 @endguest
 
 
