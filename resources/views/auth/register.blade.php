@@ -313,7 +313,8 @@
                         required: "Please enter the Mobile Number.",
                         Numbers: "Please enter valid Mobile number.",
                         minlength: "Please enter the minimum 10 digits mobile number.",
-                        maxlength: "Please enter only upto 10 digits mobile number."
+                        maxlength: "Please enter only upto 10 digits mobile number.",
+                        remote : "Entered Mobile no already exists, Please select another.",
                     },
                     userCompany: {
                         required: "Please enter the Company or Institution Name.",

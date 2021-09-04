@@ -106,7 +106,8 @@ class RegisterController extends Controller
 
         $user->sendEmailVerificationNotification();
        // return  redirect()->intended('website')->with('message', 'Please Verify email with in 60 minutes.');
-       return redirect(RouteServiceProvider::HOME);
+     //  return redirect(RouteServiceProvider::HOME);
+       return view("afterregister");
        // return  redirect(route('website'))->with('message', 'Please Verify email with in 60 minutes.');
     }
 

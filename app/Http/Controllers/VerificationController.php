@@ -51,4 +51,8 @@ class VerificationController extends Controller
 
         return response()->json(["msg" => "Email verification link sent on your email id"]);
     }
+
+    public function registermail(){
+        return view("afterregister");
+    }
 }

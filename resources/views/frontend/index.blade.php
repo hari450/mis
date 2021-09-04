@@ -51,6 +51,12 @@
                     </div>
                     <div class="banner-login-wrapper">
                         <h1>LOGIN</h1>
+                        @if (Session::has('message'))
+                        <div class="alert alert-warning">{{Session::get('message')}}</div>
+                         @endif
+                    <form action="{{ url('authlogin') }}" id="loginfrm" name="loginfrm" method="post"
+                    target="_top">
+                    @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -58,8 +64,8 @@
                                         <div class="input-group-addon login-input-icon-wrapper">
                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         </div>
-                                        <input name="txtemail" id="txtemail" type="text"
-                                            placeholder="Input your user ID or Email" name="pass"
+                                        <input  id="txtemail" type="text"
+                                            placeholder="Input your user ID or Email" name="email"
                                             class="login-input form-control">
                                     </div>
                                 </div>
@@ -72,8 +78,8 @@
                                         <div class="input-group-addon login-input-icon-wrapper">
                                         <i class="fa fa-key" aria-hidden="true"></i>
                                         </div>
-                                        <input name="pwd" id="pwd" type="password" placeholder="Input your password"
-                                            name="pass" class="login-input form-control">
+                                        <input  id="pwd" type="password" placeholder="Input your password"
+                                            name="password" class="login-input form-control">
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +89,11 @@
                                 <span class="bi bi-box-arrow-right"></span> LOG IN
                             </button>
                         </div>
+                    </form>
+
+
                         <div class="d-block">
-                            <a class="login-forgot" href="./forgot-password.php">Forgot password</a>
+                            <a class="login-forgot" href="{{ route('password.request') }}">Forgot password</a>
                         </div>
                         <div class="customer-service-wrapper">
                             <h3>Customer Service</h3>
