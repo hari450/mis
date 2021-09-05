@@ -45,10 +45,15 @@
 
             </li>
 
+            @auth
             <li class="nav-item">
+               <a href="{{ route('website.profile')}}">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-user-o"
-                        aria-hidden="true"></i></button>
+                    aria-hidden="true"></i></button>
+            </a>
             </li>
+            @endauth
+
             <li class="nav-item">
                 <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-heart-o"
                         aria-hidden="true"></i></button>
@@ -56,11 +61,14 @@
             <li class="nav-item">
 
             <span class="clearfix">
-                <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-shopping-basket"
-                    aria-hidden="true"></i></button>
-                <span class="basket-item-count">
-                    <span class="badge badge-pill red"> 0 </span>
-                </span>
+                <a href="{{ route('cartdata')}}">
+                    <button type="button" class="btn btn-link btn-head-icon"><i class="fa fa-shopping-basket"
+                        aria-hidden="true"></i></button>
+                    <span class="basket-item-count">
+                        <span class="badge badge-pill red"> 0 </span>
+                    </span>
+                </a>
+
             </span>
 
             </li>

@@ -99,8 +99,18 @@ if (page === 'home.php') {
             url: "{{ route('load-cart-data') }}",
             method: "GET",
             success: function(response) {
-                jQuery('.basket-item-count').html('');
                 var parsed = jQuery.parseJSON(response)
+                if(parsed.cartdata){
+                    parsed.cartdata.forEach(element => {
+                        $(`.prod_id_${element.item_id}`).val(element.item_quantity)
+                           console.log(`.prod_id_${element.item_id}`)
+                    });
+                }
+
+
+
+                jQuery('.basket-item-count').html('');
+
                 var value = parsed; //Single Data Viewing
                 jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill red">' + value[
                     'totalcart'] + '</span>'));

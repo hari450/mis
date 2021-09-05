@@ -19,12 +19,14 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         $status = $request->only('status');
         $user = User::where([ ['email', $request->only('email')]])->first();
-        if($user->email_verified_at == null){
-            return Redirect::back()->with('message', 'Please Verify Your email');
-        }
+
+
 
 
         if($user){
+            if($user->email_verified_at == null){
+                return Redirect::back()->with('message', 'Please Verify Your email');
+            }
 
        if($user->status != 1){
         return Redirect::back()->with('message', 'Please check the login');
@@ -47,5 +49,9 @@ class UserController extends Controller
     public function authlogout(Request $request){
         Auth::logout();
         return redirect()->intended('website');
+    }
+
+    public function profile(){
+      return view('frontend.profile');
     }
 }

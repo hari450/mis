@@ -56,7 +56,7 @@ Route::prefix('website')->group(function () {
     // parentcategory
     Route::get('/listparents/{childategory_id}', [App\Http\Controllers\FrontendController::class, 'listparents'])->name('website.listparents');
     Route::get('/login',[App\Http\Controllers\UserController::class, 'login'])->name('website.userlogin');
-
+    Route::get('/profile',[App\Http\Controllers\UserController::class, 'profile'])->name('website.profile');
 
 });
 

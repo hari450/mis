@@ -80,13 +80,14 @@ class CartController extends Controller
             $cart_data = json_decode($cookie_data, true);
             $totalcart = count($cart_data);
 
-            echo json_encode(array('totalcart' => $totalcart)); die;
+            $cart_data = json_decode($cookie_data, true);
+            echo json_encode(array('totalcart' => $totalcart,'cartdata'=>$cart_data)); die;
             return;
         }
         else
         {
             $totalcart = "0";
-            echo json_encode(array('totalcart' => $totalcart)); die;
+            echo json_encode(array('totalcart' => $totalcart,'cartdata'=>'')); die;
             return;
         }
     }

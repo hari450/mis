@@ -76,11 +76,20 @@
             </div>
 
         </div>
+
+
+
+
         <div class="row product_data">
-        <input type="hidden" class="product_id" value="{{ $part_number->id }}"> <!-- Your Product ID -->
-        <input type="text" class="qty-input" value="1"> <!-- Your Number of Quantity -->
-        <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+            <input type="hidden" class="product_id" value="{{ $part_number->id }}">
+            <button type="button" id="sub" class="sub">-</button>
+            <input type="number" id="1" value="1" min="1" max="{{ $part_number->quantity}}" class="qty-input prod_id_{{ $part_number->id }}"/>
+            <button type="button" id="add" class="add">+</button>
+            <button type="button" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
         </div>
+
+
+
 
         {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $part_number->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
 
@@ -88,10 +97,27 @@
 </div>
 
 <script>
+
+
+
+
+
+
+    $('.add').click(function () {
+
+    	$(this).prev().val(+$(this).prev().val() + 1);
+
+});
+$('.sub').click(function () {
+		if ($(this).next().val() > 1) {
+    	if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+		}
+});
+
+
     $(document).ready(function () {
         $('.add-to-cart-btn').click(function (e) {
             e.preventDefault();
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
