@@ -23,7 +23,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => ['auth','adminauth']], function()
 {
 
 Route::resource('categorys', App\Http\Controllers\CategorysController::class);
