@@ -135,11 +135,56 @@ $('.sub').click(function () {
                     'product_id': product_id,
                 },
                 success: function (response) {
+                    cartload()
+                    $('span > .badge-pill').html(response.count);
                     alertify.set('notifier','position','top-right');
                     alertify.success(response.status);
                 },
             });
+
         });
+
+
+
+// load cart data
+
+
+function cartload() {
+        jQuery.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url: "{{ route('load-cart-data') }}",
+            method: "GET",
+            success: function(response) {
+                var parsed = jQuery.parseJSON(response)
+                if(parsed.cartdata){
+                    parsed.cartdata.forEach(element => {
+                        $(`.prod_id_${element.item_id}`).val(element.item_quantity)
+                           console.log(`.prod_id_${element.item_id}`)
+                    });
+                }
+
+
+
+                jQuery('.basket-item-count').html('');
+
+                var value = parsed; //Single Data Viewing
+                jQuery('.basket-item-count').append(jQuery('<span class="badge badge-pill red">' + value[
+                    'totalcart'] + '</span>'));
+            }
+        });
+    }
+
+
+
+
+
+
+
     });
 </script>
 

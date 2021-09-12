@@ -6,6 +6,10 @@
         <div class="alert alert-dark">{{Session::get('message')}}</div>
          @endif
 
+         @if (Session::has('success'))
+         <div class="alert alert-success">{{Session::get('success')}}</div>
+          @endif
+
         <div class="row">
             <div class="col-md-3">
                 <div class="nav-category-wrapper">

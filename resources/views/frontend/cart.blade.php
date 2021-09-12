@@ -38,8 +38,10 @@
                                         </thead>
                                         <tbody class="my-auto">
                                             @foreach ($cart_data as $data)
-                                            <tr class="cartpage">
+                                            <tr class="cartpage cartpage" id="{{ $data['item_id'] }}">
+
                                                 <td class="cart-image">
+                                                    <input type="hidden" class="product_id" value="{{ $data['item_id'] }}" >
                                                     <a class="entry-thumbnail" href="javascript:void(0)">
                                                         <img src="{{url('')}}/uploads/{{ $data['item_image'] }}"  width="70px" alt="">
                                                     </a>
@@ -52,9 +54,24 @@
                                                 <td class="cart-product-sub-total">
                                                     <span class="cart-sub-total-price">{{ number_format($data['item_price'], 2) }}</span>
                                                 </td>
-                                                <td class="cart-product-quantity">
-                                                     <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
+
+
+                                                <td class="cart-product-quantity" width="130px">
+                                                    <div class="input-group quantity">
+                                                        <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
+                                                            <span class="input-group-text">-</span>
+                                                        </div>
+                                                        <input type="text" class="qty-input form-control" maxlength="1" max="{{ $data['product_quantity'] }}" value="{{ $data['item_quantity'] }}">
+                                                        <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
+                                                            <span class="input-group-text">+</span>
+                                                        </div>
+                                                    </div>
                                                 </td>
+
+
+                                                {{-- <td class="cart-product-quantity">
+                                                     <input type="number" class="qty-input form-control" value="{{ $data['item_quantity'] }}" min="1" max="100"/>
+                                                </td> --}}
                                                 <td class="cart-product-grand-total">
                                                     <span class="cart-grand-total-price">{{ number_format($data['item_quantity'] * $data['item_price'], 2) }}</span>
                                                 </td>
@@ -72,7 +89,7 @@
 
                                 <div class="col-md-8 col-sm-12 estimate-ship-tax">
                                     <div>
-                                        <a href="{{ url('collections') }}" class="btn btn-upper btn-warning outer-left-xs">Continue Shopping</a>
+                                        <a href="{{ url('website') }}" class="btn btn-upper btn-warning outer-left-xs">Continue Shopping</a>
                                     </div>
                                 </div><!-- /.estimate-ship-tax -->
 
@@ -106,7 +123,7 @@
                                             <div class="col-md-12">
                                                 <div class="cart-checkout-btn text-center">
                                                     @if (Auth::user())
-                                                        <a href="{{ url('checkout') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
+                                                        <a href="{{ route('checkout') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
                                                     @else
                                                         <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
                                                         {{-- you add a pop modal for making a login --}}
@@ -156,6 +173,81 @@ $('.clear_cart').click(function (e) {
     });
 
 });
+
+
+$('.increment-btn').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(incre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value<10){
+                value++;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(decre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value>1){
+                value--;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+
+
+
+
+$('.changeQuantity').click(function (e) {
+            e.preventDefault();
+
+            var quantity = $(this).closest(".cartpage").find('.qty-input').val();
+            var product_id = $(this).closest(".cartpage").find('.product_id').val();
+
+            var data = {
+                '_token': $('input[name=_token]').val(),
+                'quantity':quantity,
+                'product_id':product_id,
+            };
+
+            $.ajax({
+                url: '{{ route("update-to-cart") }}',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+
+                   window.location.reload();
+                    alertify.set('notifier','position','top-right');
+                    alertify.success(response.status);
+                }
+            });
+        });
+
+
+        $('.delete_cart_data').click(function (e) {
+            e.preventDefault();
+
+            var product_id = $(this).closest(".cartpage").find('.product_id').val();
+
+            var data = {
+                '_token': $('input[name=_token]').val(),
+                "product_id": product_id,
+            };
+
+            // $(this).closest(".cartpage").remove();
+
+            $.ajax({
+                url: '{{ route("delete-from-cart") }}',
+                type: 'DELETE',
+                data: data,
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+
 
 });
 </script>

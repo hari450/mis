@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 //Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -84,7 +86,8 @@ Route::post('addtocart',[App\Http\Controllers\CartController::class, 'addtocart'
 Route::get('/cartloadbyajax',[App\Http\Controllers\CartController::class, 'cartloadbyajax'])->name('load-cart-data');
 Route::get('/cartdata',[App\Http\Controllers\CartController::class, 'cartdata'])->name('cartdata');
 Route::get('/clearcart',[App\Http\Controllers\CartController::class, 'clearcart'])->name('clear-cart');
-
+Route::post('update-to-cart',[App\Http\Controllers\CartController::class, 'updatetocart'])->name('update-to-cart');
+Route::delete('delete-from-cart',[App\Http\Controllers\CartController::class, 'deletefromcart'])->name('delete-from-cart');
 
 //Route::get('add-to-cart/{id}', [ProductController::class, 'addtocart'])->name('add.to.cart');
 
@@ -92,4 +95,8 @@ Route::get('/clearcart',[App\Http\Controllers\CartController::class, 'clearcart'
 Route::get('/website/product/{childcat_id}', [App\Http\Controllers\FrontendController::class, 'product'])->name('website.product');
 Route::get('/website/part/{product_id}', [App\Http\Controllers\FrontendController::class, 'part'])->name('website.part');
 
+
+// checkout
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 

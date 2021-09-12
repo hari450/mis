@@ -99,9 +99,13 @@ if (page === 'home.php') {
             url: "{{ route('load-cart-data') }}",
             method: "GET",
             success: function(response) {
+
                 var parsed = jQuery.parseJSON(response)
+
                 if(parsed.cartdata){
-                    parsed.cartdata.forEach(element => {
+
+
+                    Object.values(parsed.cartdata).forEach(element => {
                         $(`.prod_id_${element.item_id}`).val(element.item_quantity)
                            console.log(`.prod_id_${element.item_id}`)
                     });
